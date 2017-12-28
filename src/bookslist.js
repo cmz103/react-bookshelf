@@ -11,7 +11,8 @@ class BooksList extends Component {
 
     render() {
 
-        const {books, shelves, updateBook, currentShelf, queriedBooks} = this.props;
+        const {books, shelves, updateBook, currentShelf, queriedBooks, getShelf} = this.props;
+
 
         return (
             <ol className="books-grid">
@@ -25,13 +26,13 @@ class BooksList extends Component {
                         .filter(book => book.shelf === currentShelf)
                         .map((book) => (
                             <li key={book.id}>
-                                <Book shelves={shelves} book={book} updateBook={updateBook}/>
+                                <Book shelves={shelves} book={book} updateBook={updateBook} getShelf={getShelf}/>
                             </li>
                         ))
                     : !queriedBooks.error || queriedBooks.length
                         ? queriedBooks.map((qbook) => (
                             <li key={qbook.id}>
-                                <Book shelves={shelves} book={qbook} updateBook={updateBook}/>
+                                <Book shelves={shelves} book={qbook} updateBook={updateBook} getShelf={getShelf}/>
                             </li>
                         ))
                         : (

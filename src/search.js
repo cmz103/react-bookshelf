@@ -30,7 +30,7 @@ class Search extends Component {
     }
 
     render() {
-        const {queriedBooks, shelves, updateBook, search} = this.props;
+        const {queriedBooks, shelves, updateBook, getShelf} = this.props;
         const {query} = this.state;
 
         return (
@@ -49,7 +49,8 @@ class Search extends Component {
                     <BooksList
                         queriedBooks={queriedBooks}
                         shelves={shelves}
-                        updateBook={updateBook}/>
+                        updateBook={updateBook}
+                        getShelf={getShelf}/>
                 </div>
             </div>
         )

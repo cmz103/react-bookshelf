@@ -4,9 +4,16 @@ import PropTypes from 'prop-types';
 
 class Book extends Component {
 
+    static propTypes = {
+        shelves: PropTypes.array.isRequired,
+        updateBook: PropTypes.func.isRequired,
+        book: PropTypes.object.isRequired,
+        getShelf: PropTypes.func.isRequired
+    }
+
     render() {
 
-        const {book, shelves, updateBook} = this.props;
+        const {book, shelves, updateBook, getShelf} = this.props;
 
         return (
             <div className="book">
@@ -21,7 +28,7 @@ class Book extends Component {
                     <div className="book-shelf-changer">
                         <ShelfChanger
                             shelves={shelves}
-                            selected={book.shelf}
+                            selected={getShelf(book)}
                             updateBook={updateBook}
                             book={book}/>
                     </div>

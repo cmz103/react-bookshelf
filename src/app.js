@@ -98,7 +98,6 @@ class BooksApp extends Component {
     * @param {string} query
     */
     search = (query) => {
-
         if (query) {
             BooksAPI
                 .search(query)
@@ -110,6 +109,24 @@ class BooksApp extends Component {
         }
     };
 
+    /**
+    * @description Filters books array, returns shelf property
+    * @param {object} book
+    * @returns {string} shelf
+    */
+    getBookShelf = (book) => {
+        const existingBook = this
+            .state
+            .books
+            .filter(b => b.id === book.id);
+        if (existingBook.length) {
+            // console.log(existingBook[0].shelf);
+            return existingBook[0].shelf;
+        } else {
+            return null;
+        }
+    };
+
     render() {
         return (
             <div className="app">
@@ -118,18 +135,20 @@ class BooksApp extends Component {
                     exact
                     path="/search"
                     render={() => (<Search
-                        search={this.search}
-                        queriedBooks={this.state.queriedBooks}
-                        shelves={this.state.shelves}
-                        updateBook={this.updateBook}/>)}/>
+                    search={this.search}
+                    queriedBooks={this.state.queriedBooks}
+                    shelves={this.state.shelves}
+                    updateBook={this.updateBook}
+                    getShelf={this.getBookShelf}/>)}/>
 
                 <Route
                     exact
                     path="/"
                     render={() => (<Shelves
-                        books={this.state.books}
-                        shelves={this.state.shelves}
-                        updateBook={this.updateBook}/>)}/>
+                    books={this.state.books}
+                    shelves={this.state.shelves}
+                    updateBook={this.updateBook}
+                    getShelf={this.getBookShelf}/>)}/>
 
             </div>
         )
