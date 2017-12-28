@@ -38,7 +38,7 @@ class BooksApp extends Component {
         let {shelves} = this.state;
 
         // create new array of shelf names
-        shelves = Array.from(books, book => book.shelf);
+        shelves = books.map(book => book.shelf);
         shelves = shelves.filter((elem, index, self) => index === self.indexOf(elem));
 
         this.setState({shelves});
@@ -53,12 +53,11 @@ class BooksApp extends Component {
         if (!shelf)
             return;
 
-        let toUpdatedIndex;
         let booksCopy;
 
         BooksAPI.update(book, shelf);
 
-        toUpdatedIndex = this.getUpdatedIndex(book);
+        const toUpdatedIndex = this.getUpdatedIndex(book);
         booksCopy = this.copyArr(this.state.books);
 
         // if book already exists in current books array, update index else just push
@@ -91,7 +90,7 @@ class BooksApp extends Component {
     * @returns {array} copied array
     */
     copyArr = (arr) => {
-        return JSON.parse(JSON.stringify(arr));
+        return [...arr];
     };
 
     /**
@@ -119,18 +118,18 @@ class BooksApp extends Component {
                     exact
                     path="/search"
                     render={() => (<Search
-                    search={this.search}
-                    queriedBooks={this.state.queriedBooks}
-                    shelves={this.state.shelves}
-                    updateBook={this.updateBook}/>)}/>
+                        search={this.search}
+                        queriedBooks={this.state.queriedBooks}
+                        shelves={this.state.shelves}
+                        updateBook={this.updateBook}/>)}/>
 
                 <Route
                     exact
                     path="/"
                     render={() => (<Shelves
-                    books={this.state.books}
-                    shelves={this.state.shelves}
-                    updateBook={this.updateBook}/>)}/>
+                        books={this.state.books}
+                        shelves={this.state.shelves}
+                        updateBook={this.updateBook}/>)}/>
 
             </div>
         )
