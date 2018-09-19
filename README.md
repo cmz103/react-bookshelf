@@ -1,4 +1,4 @@
-# Bookshelf Udacity Class Project
+# Bookshelf React/React Router
 
 Bookshelf is an application written in React and React Router. You can search for a book and add them to either the "Currently Reading", "Want to Read", and "Read" shelf. Additionally, you can move books into other shelves.
 
